@@ -7,9 +7,9 @@ public class Civilizations {
 
     int [] boardArray;
     int id;
-    Civilizations(int startingPoint, int r, int g, int b, Board board, int [] boardArray, int id){
+    Civilizations(int startingPoint, Color colorName, Board board, int [] boardArray, int id){
         this.startingPoint = startingPoint;
-        this.color = new Color(r, g, b);
+        this.color = colorName;
         this.board = board;
         this.boardArray = boardArray;
         this.id= id;
