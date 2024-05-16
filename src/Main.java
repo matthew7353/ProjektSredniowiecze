@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main extends JFrame {
     /*
@@ -15,10 +16,11 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
         Board board = new Board();
-        board.updateCell(0,0, Color.BLUE);
-        board.updateCell(9,0, Color.RED);
-        board.updateCell(0,9, Color.GREEN);
-        board.updateCell(9,9, Color.YELLOW);
+        ArrayList<Civilizations> array = new ArrayList<>();
+        array.add(new Civilizations(0, 0, 0, 255, board));
+        array.add(new Civilizations(9, 0, 255, 0, board));
+        array.add(new Civilizations(90, 255, 0, 0, board));
+        array.add(new Civilizations(99, 200, 50, 50, board));
     }
     //hehe
 }
