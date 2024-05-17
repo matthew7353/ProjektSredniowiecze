@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class CivilizationLeft extends Civilizations{
-    CivilizationLeft(int startingPoint, int r, int g, int b, Board board, int [] boardArray, int id){
-        super(startingPoint, r, g, b, board, boardArray, id);
+    CivilizationLeft(int startingPoint, int r, int g, int b, Board board, int [] boardArray, int id, int numOfTiles){
+        super(startingPoint, r, g, b, board, boardArray, id, numOfTiles);
     }
 
     @Override
@@ -12,45 +12,45 @@ public class CivilizationLeft extends Civilizations{
         int n = rand.nextInt(2);
         if(n == 0) {
             for (int x : conqueredTiles) {
-                if (x % 10 != 0) {
+                if (x % numOfTiles != 0) {
                     if (boardArray[x - 1] == 0) {
                         target = x - 1;
                         conqueredTiles.add(target);
                         boardArray[target] = this.id;
-                        board.updateCell(target / 10, target % 10, color);
+                        board.updateCell(target / numOfTiles, target % numOfTiles, color);
                         return;
                     }
                 }
             }
             for (int x : conqueredTiles) {
-                if (x % 10 != 9) {
+                if (x % numOfTiles != numOfTiles - 1) {
                     if (boardArray[x + 1] == 0) {
                         target = x + 1;
                         conqueredTiles.add(target);
                         boardArray[target] = this.id;
-                        board.updateCell(target / 10, target % 10, color);
+                        board.updateCell(target / numOfTiles, target % numOfTiles, color);
                         return;
                     }
                 }
             }
             for (int x : conqueredTiles) {
-                if (x < 89) {
-                    if (boardArray[x + 10] == 0) {
-                        target = x + 10;
+                if (x < (numOfTiles * numOfTiles - 1) - numOfTiles) {
+                    if (boardArray[x + numOfTiles] == 0) {
+                        target = x + numOfTiles;
                         conqueredTiles.add(target);
                         boardArray[target] = this.id;
-                        board.updateCell(target / 10, target % 10, color);
+                        board.updateCell(target / numOfTiles, target % numOfTiles, color);
                         return;
                     }
                 }
             }
             for (int x : conqueredTiles) {
-                if (x > 10) {
-                    if (boardArray[x - 10] == 0) {
-                        target = x - 10;
+                if (x > numOfTiles - 1) {
+                    if (boardArray[x - numOfTiles] == 0) {
+                        target = x - numOfTiles;
                         conqueredTiles.add(target);
                         boardArray[target] = this.id;
-                        board.updateCell(target / 10, target % 10, color);
+                        board.updateCell(target / numOfTiles, target % numOfTiles, color);
                         return;
                     }
                 }
