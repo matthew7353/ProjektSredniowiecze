@@ -10,9 +10,9 @@ abstract class Civilizations {
     int id;
     int numOfTiles;
     ArrayList<Integer> conqueredTiles = new ArrayList<>();
-    Civilizations(int startingPoint, int r, int g, int b, Board board, int [] boardArray, int id, int numOfTiles){
+    Civilizations(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles){
         this.startingPoint = startingPoint;
-        this.color = new Color(r, g, b);
+        this.color = colorName;
         this.board = board;
         this.boardArray = boardArray;
         this.id= id;
