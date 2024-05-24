@@ -46,9 +46,8 @@ public class Main extends JFrame {
 
 
         array.add(new CivilizationUp(pozycje.get(0), Color.RED, board, boardList, 1, numOfTiles));
-        array.add(new CivilizationUp(pozycje.get(1), Color.BLUE, board, boardList, 2, numOfTiles));
-        array.add(new CivilizationLeft(pozycje.get(2), Color.GREEN, board, boardList, 3, numOfTiles));
-        array.add(new CivilizationLeft(pozycje.get(3), Color.YELLOW, board, boardList, 4, numOfTiles));
+        array.add(new CivilizationLeft(pozycje.get(1), Color.GREEN, board, boardList, 2, numOfTiles));
+        array.add(new CivilizationCircle(pozycje.get(2), Color.BLUE, board, boardList, 3, numOfTiles));
 
         timer[0].start();
     }
