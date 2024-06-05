@@ -16,26 +16,35 @@ public class CivilizationCircle extends Civilizations{
     @Override
     public void conquer(){
         Random rand = new Random();
+        int randomIndex = rand.nextInt(conqueredTiles.size());
+        int randomElement = conqueredTiles.get(randomIndex);
         int n = rand.nextInt(2);
         if (n == 0) {
-            for (int x : conqueredTiles) {
-                if ((x < numOfTiles * (numOfTiles - 1)) && (boardArray[x + numOfTiles] == 0)) {
-                    target = x + numOfTiles;
+                if ((randomElement < numOfTiles * (numOfTiles - 1)) && (boardArray[randomElement + numOfTiles] == 0)) {
+                    target = randomElement + numOfTiles;
                     takeControlOf(target);
                 }
-                if ((x > numOfTiles) && boardArray[x - numOfTiles] == 0) {
-                    target = x - numOfTiles;
+            conqueredTiles.addAll(newConqueredTiles);
+        }
+        if (n == 0) {
+                if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] == 0) {
+                    target = randomElement - numOfTiles;
                     takeControlOf(target);
                 }
-                if ((x % numOfTiles != numOfTiles - 1) && boardArray[x + 1] == 0) {
-                    target = x + 1;
+            conqueredTiles.addAll(newConqueredTiles);
+        }
+        if (n == 0) {
+                if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] == 0) {
+                    target = randomElement + 1;
                     takeControlOf(target);
                 }
-                if ((x % numOfTiles != 0) && (boardArray[x - 1] == 0)) {
-                    target = x - 1;
+            conqueredTiles.addAll(newConqueredTiles);
+        }
+        if (n == 0) {
+                if ((randomElement % numOfTiles != 0) && (boardArray[randomElement - 1] == 0)) {
+                    target = randomElement - 1;
                     takeControlOf(target);
                 }
-            }
             conqueredTiles.addAll(newConqueredTiles);
         }
     }
