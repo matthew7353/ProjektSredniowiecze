@@ -18,6 +18,15 @@ public class CivilizationCircle extends Civilizations{
         Random rand = new Random();
         int randomIndex = rand.nextInt(conqueredTiles.size());
         int randomElement = conqueredTiles.get(randomIndex);
+        while (
+                conqueredTiles.contains(randomElement + numOfTiles) &&
+                conqueredTiles.contains(randomElement - numOfTiles) &&
+                conqueredTiles.contains(randomElement + 1) &&
+                conqueredTiles.contains(randomElement - 1))
+        {
+            randomIndex = rand.nextInt(conqueredTiles.size());
+            randomElement = conqueredTiles.get(randomIndex);
+        }
         int n = rand.nextInt(2);
         if (n == 0) {
                 if ((randomElement < numOfTiles * (numOfTiles - 1)) && (boardArray[randomElement + numOfTiles] == 0)) {
@@ -26,6 +35,7 @@ public class CivilizationCircle extends Civilizations{
                 }
             conqueredTiles.addAll(newConqueredTiles);
         }
+        n = rand.nextInt(2);
         if (n == 0) {
                 if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] == 0) {
                     target = randomElement - numOfTiles;
@@ -33,6 +43,7 @@ public class CivilizationCircle extends Civilizations{
                 }
             conqueredTiles.addAll(newConqueredTiles);
         }
+        n = rand.nextInt(2);
         if (n == 0) {
                 if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] == 0) {
                     target = randomElement + 1;
@@ -40,6 +51,7 @@ public class CivilizationCircle extends Civilizations{
                 }
             conqueredTiles.addAll(newConqueredTiles);
         }
+        n = rand.nextInt(2);
         if (n == 0) {
                 if ((randomElement % numOfTiles != 0) && (boardArray[randomElement - 1] == 0)) {
                     target = randomElement - 1;
