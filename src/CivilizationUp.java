@@ -9,7 +9,6 @@ public class CivilizationUp extends Civilizations{
 
     @Override
     public void conquer(){
-        int target;
         Random rand = new Random();
         int n = rand.nextInt(2);
         if(n == 0) {

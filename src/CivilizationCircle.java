@@ -6,12 +6,17 @@ public class CivilizationCircle extends Civilizations{
     CivilizationCircle(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles) {
         super(startingPoint, colorName, board, boardArray, id, numOfTiles);
     }
-    int target;
     ArrayList<Integer> newConqueredTiles = new ArrayList<>();
     public void takeControlOf(int target){
-                newConqueredTiles.add(target);
-                boardArray[target] = this.id;
-                board.updateCell(target / numOfTiles,target % numOfTiles, color);
+        for (Civilizations civ : allCivilizations){
+            if (boardArray[target] == civ.getId() && civ.conqueredTiles.contains(target)) {
+                civ.conqueredTiles.remove(target);
+            }
+        }
+        newConqueredTiles.add(target);
+        boardArray[target] = this.id;
+        board.updateCell(target / numOfTiles,target % numOfTiles, color);
+
     }
     @Override
     public void conquer(){
@@ -27,32 +32,20 @@ public class CivilizationCircle extends Civilizations{
             randomIndex = rand.nextInt(conqueredTiles.size());
             randomElement = conqueredTiles.get(randomIndex);
         }
-        int n = rand.nextInt(2);
-        if (n == 0) {
+        int n = rand.nextInt(101);
+        if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
                 if ((randomElement < numOfTiles * (numOfTiles - 1)) && (boardArray[randomElement + numOfTiles] == 0)) {
                     target = randomElement + numOfTiles;
                     takeControlOf(target);
                 }
-            conqueredTiles.addAll(newConqueredTiles);
-        }
-        n = rand.nextInt(2);
-        if (n == 0) {
                 if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] == 0) {
                     target = randomElement - numOfTiles;
                     takeControlOf(target);
                 }
-            conqueredTiles.addAll(newConqueredTiles);
-        }
-        n = rand.nextInt(2);
-        if (n == 0) {
                 if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] == 0) {
                     target = randomElement + 1;
                     takeControlOf(target);
                 }
-            conqueredTiles.addAll(newConqueredTiles);
-        }
-        n = rand.nextInt(2);
-        if (n == 0) {
                 if ((randomElement % numOfTiles != 0) && (boardArray[randomElement - 1] == 0)) {
                     target = randomElement - 1;
                     takeControlOf(target);

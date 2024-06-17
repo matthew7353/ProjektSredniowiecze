@@ -11,13 +11,13 @@ public class Main extends JFrame {
         int numOfTiles = 40;
 
         Board board = new Board(numOfTiles);
-        ArrayList<Civilizations> array = new ArrayList<>();
+        ArrayList<Civilizations> civilizationsInPlay = new ArrayList<>();
         int [] boardList = new int[numOfTiles * numOfTiles];
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(Civilizations x: array){
+                for(Civilizations x: civilizationsInPlay){
                     x.conquer();
                 }
                 timer[0].restart();
@@ -45,9 +45,13 @@ public class Main extends JFrame {
         }
 
 
-        array.add(new CivilizationCircle(pozycje.get(0), Color.RED, board, boardList, 1, numOfTiles));
-        array.add(new CivilizationCircle(pozycje.get(1), Color.GREEN, board, boardList, 2, numOfTiles));
-        array.add(new CivilizationCircle(pozycje.get(2), Color.BLUE, board, boardList, 3, numOfTiles));
+        civilizationsInPlay.add(new CivilizationCircle(pozycje.get(0), Color.RED, board, boardList, 1, numOfTiles));
+        civilizationsInPlay.add(new CivilizationCircle(pozycje.get(1), Color.GREEN, board, boardList, 2, numOfTiles));
+        civilizationsInPlay.add(new CivilizationCircle(pozycje.get(2), Color.BLUE, board, boardList, 3, numOfTiles));
+
+        for (Civilizations civ : civilizationsInPlay) {
+            civ.setAllCivilizations(civilizationsInPlay);
+        }
 
         timer[0].start();
     }
