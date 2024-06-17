@@ -9,8 +9,13 @@ public class CivilizationCircle extends Civilizations{
     ArrayList<Integer> newConqueredTiles = new ArrayList<>();
     public void takeControlOf(int target){
         for (Civilizations civ : allCivilizations){
-            if (boardArray[target] == civ.getId() && civ.conqueredTiles.contains(target)) {
-                civ.conqueredTiles.remove(target);
+            if (boardArray[target] == civ.getId() && civ.conqueredTiles.contains(target)){
+                for(int i = 0; i < civ.conqueredTiles.size(); i++){
+                    if(civ.conqueredTiles.get(i) == target){
+                        civ.conqueredTiles.remove(i);
+                        break;
+                    }
+                }
             }
         }
         newConqueredTiles.add(target);
@@ -33,20 +38,21 @@ public class CivilizationCircle extends Civilizations{
             randomElement = conqueredTiles.get(randomIndex);
         }
         int n = rand.nextInt(101);
-        if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
-                if ((randomElement < numOfTiles * (numOfTiles - 1)) && (boardArray[randomElement + numOfTiles] == 0)) {
+        //if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
+        if(n >= 0){
+                if ((randomElement < numOfTiles * (numOfTiles - 1)) && boardArray[randomElement + numOfTiles] != this.id) {
                     target = randomElement + numOfTiles;
                     takeControlOf(target);
                 }
-                if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] == 0) {
+                else if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] != this.id) {
                     target = randomElement - numOfTiles;
                     takeControlOf(target);
                 }
-                if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] == 0) {
+                else if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] != this.id) {
                     target = randomElement + 1;
                     takeControlOf(target);
                 }
-                if ((randomElement % numOfTiles != 0) && (boardArray[randomElement - 1] == 0)) {
+                else if ((randomElement % numOfTiles != 0) && boardArray[randomElement - 1] != this.id){
                     target = randomElement - 1;
                     takeControlOf(target);
                 }
