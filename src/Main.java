@@ -56,7 +56,7 @@ public class Main extends JFrame {
 
 
         civilizationsInPlay.add(new CivilizationCircle(positions.get(0), Color.RED, board, boardList, 1, mainObject.numOfTiles, 90, 10, 1));
-        civilizationsInPlay.add(new AnotherCivilization(positions.get(1), Color.GREEN, board, boardList, 2, mainObject.numOfTiles, 50, 50, 2));
+        civilizationsInPlay.add(new CivilizationCircle(positions.get(1), Color.GREEN, board, boardList, 2, mainObject.numOfTiles, 50, 50, 2));
         civilizationsInPlay.add(new CivilizationNext(positions.get(2), Color.BLUE, board, boardList, 3, mainObject.numOfTiles, 40, 80, 3));
 
         for (Civilizations civ : civilizationsInPlay) {
