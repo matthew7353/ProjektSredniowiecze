@@ -13,6 +13,12 @@ public class Main extends JFrame {
         Board board = new Board(numOfTiles);
         ArrayList<Civilizations> civilizationsInPlay = new ArrayList<>();
         int [] boardList = new int[numOfTiles * numOfTiles];
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Saving data before exit...");
+            DataLogger.logData("SimulationData", civilizationsInPlay);
+        }));
+        
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(100, new ActionListener() {
             @Override
