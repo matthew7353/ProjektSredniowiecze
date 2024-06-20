@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends JFrame {
+
     int numOfTiles = 40;
     int timerDelay = 10;
+
     public static void main(String[] args) {
-        // LICZBA PÓL PLANSZY W JEDNYM RZĘDZIE
         Main mainObject = new Main();
 
         Board board = new Board(mainObject.numOfTiles);
@@ -20,6 +21,8 @@ public class Main extends JFrame {
             System.out.println("Saving data before exit...");
             DataLogger.logData("SimulationData", civilizationsInPlay);
         }));
+
+        // clock for simulation flow
         Timer[] timer = new Timer[1];
         timer[0] = new Timer(mainObject.timerDelay, new ActionListener() {
             @Override
@@ -31,30 +34,30 @@ public class Main extends JFrame {
             }
         });
 
-        //Losowanie koorydnatów
+        //randomizing spawn points of civilizations
         int w1 = 0;
-        ArrayList<Integer> pozycje = new ArrayList<>();
+        ArrayList<Integer> positions = new ArrayList<>();
         while (w1<4) {
             Random rand = new Random();
             int n = rand.nextInt(mainObject.numOfTiles * mainObject.numOfTiles);
-            int jest = 0;
+            int i = 0;
 
-            for(Integer x : pozycje){
+            for(Integer x : positions){
                 if(n == x){
-                    jest++;
+                    i++;
                 }
             }
-            if(jest==0){
-                pozycje.add(n);
+            if(i==0){
+                positions.add(n);
                 w1++;
             }
 
         }
 
 
-        civilizationsInPlay.add(new CivilizationCircle(pozycje.get(0), Color.RED, board, boardList, 1, mainObject.numOfTiles, 90, 10, 1));
-        civilizationsInPlay.add(new CivilizationCircle(pozycje.get(1), Color.GREEN, board, boardList, 2, mainObject.numOfTiles, 50, 50, 2));
-        civilizationsInPlay.add(new CivilizationNext(pozycje.get(2), Color.BLUE, board, boardList, 3, mainObject.numOfTiles, 40, 80, 3));
+        civilizationsInPlay.add(new CivilizationCircle(positions.get(0), Color.RED, board, boardList, 1, mainObject.numOfTiles, 90, 10, 1));
+        civilizationsInPlay.add(new AnotherCivilization(positions.get(1), Color.GREEN, board, boardList, 2, mainObject.numOfTiles, 50, 50, 2));
+        civilizationsInPlay.add(new CivilizationNext(positions.get(2), Color.BLUE, board, boardList, 3, mainObject.numOfTiles, 40, 80, 3));
 
         for (Civilizations civ : civilizationsInPlay) {
             civ.setAllCivilizations(civilizationsInPlay);
