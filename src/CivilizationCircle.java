@@ -6,17 +6,7 @@ public class CivilizationCircle extends Civilizations{
     CivilizationCircle(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles, int chanceToGetTile, int chanceToGetEnemy, int cooldown) {
         super(startingPoint, colorName, board, boardArray, id, numOfTiles, chanceToGetTile, chanceToGetEnemy, cooldown);
     }
-    public void takeControlOf(int target){
-        for (Civilizations civ : allCivilizations){
-            if (boardArray[target] == civ.getId()){
-                civ.destroyTile(target);
-            }
-        }
-        addTile(target);
-        boardArray[target] = this.id;
-        board.updateCell(target / numOfTiles,target % numOfTiles, color);
 
-    }
     @Override
     public void conquer(){
         //checking for cooldown
