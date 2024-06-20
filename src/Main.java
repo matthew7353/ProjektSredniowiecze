@@ -14,7 +14,7 @@ public class Main extends JFrame {
         ArrayList<Civilizations> civilizationsInPlay = new ArrayList<>();
         int [] boardList = new int[numOfTiles * numOfTiles];
         Timer[] timer = new Timer[1];
-        timer[0] = new Timer(100, new ActionListener() {
+        timer[0] = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for(Civilizations x: civilizationsInPlay){

@@ -7,7 +7,7 @@ abstract class Civilizations {
     Board board;
     int [] boardArray;
     ArrayList<Civilizations> allCivilizations;
-    ArrayList<Integer> conqueredTiles = new ArrayList<>();
+    ArrayList<Tile> conqueredTiles = new ArrayList<>();
     boolean conquerTile, conquerEnemy;
     Civilizations(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles, int chanceToGetTile, int chanceToGetEnemy, int cooldown){
         this.startingPoint = startingPoint;
@@ -23,19 +23,19 @@ abstract class Civilizations {
         this.currentCooldown = cooldown;
         boardArray[startingPoint] = id;
         board.updateCell(startingPoint / numOfTiles, startingPoint % numOfTiles, color);
-        conqueredTiles.add(startingPoint);
+        addTile(startingPoint);
     }
     public void setAllCivilizations(ArrayList<Civilizations> allCivilizations) {
         this.allCivilizations = allCivilizations;
-    }
-    public ArrayList<Integer> getConqueredTiles() {
-        return conqueredTiles;
     }
     public int getId (){
         return id;
     }
     public Color getColor (){
         return color;
+    }
+    public void addTile(int target){
+        conqueredTiles.add(new Tile(target, this.id, this.boardArray, this.numOfTiles));
     }
 
     abstract void conquer();
