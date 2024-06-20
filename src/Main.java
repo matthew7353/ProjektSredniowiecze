@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends JFrame {
-    int numOfTiles = 10;
-    int timerDelay = 100;
+    int numOfTiles = 40;
+    int timerDelay = 10;
     public static void main(String[] args) {
         // LICZBA PÓL PLANSZY W JEDNYM RZĘDZIE
         Main mainObject = new Main();
