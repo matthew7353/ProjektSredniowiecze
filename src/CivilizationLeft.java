@@ -2,8 +2,8 @@ import java.util.Random;
 import java.awt.*;
 
 public class CivilizationLeft extends Civilizations{
-    CivilizationLeft(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles){
-        super(startingPoint, colorName, board, boardArray, id, numOfTiles);
+    CivilizationLeft(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles, int chanceToGetTile, int chanceToGetEnemy, int cooldown) {
+        super(startingPoint, colorName, board, boardArray, id, numOfTiles, chanceToGetTile, chanceToGetEnemy, cooldown);
     }
 
     @Override

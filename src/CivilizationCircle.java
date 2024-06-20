@@ -3,8 +3,8 @@ import java.util.Random;
 import java.awt.*;
 
 public class CivilizationCircle extends Civilizations{
-    CivilizationCircle(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles) {
-        super(startingPoint, colorName, board, boardArray, id, numOfTiles);
+    CivilizationCircle(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles, int chanceToGetTile, int chanceToGetEnemy, int cooldown) {
+        super(startingPoint, colorName, board, boardArray, id, numOfTiles, chanceToGetTile, chanceToGetEnemy, cooldown);
     }
     public void takeControlOf(int target){
         for (Civilizations civ : allCivilizations){
@@ -24,36 +24,71 @@ public class CivilizationCircle extends Civilizations{
     }
     @Override
     public void conquer(){
-        Random rand = new Random();
-        int randomIndex = rand.nextInt(conqueredTiles.size());
-        int randomElement = conqueredTiles.get(randomIndex);
-        while (
-                conqueredTiles.contains(randomElement + numOfTiles) &&
-                conqueredTiles.contains(randomElement - numOfTiles) &&
-                conqueredTiles.contains(randomElement + 1) &&
-                conqueredTiles.contains(randomElement - 1))
-        {
-            randomIndex = rand.nextInt(conqueredTiles.size());
-            randomElement = conqueredTiles.get(randomIndex);
+        //checking for cooldown
+        if(currentCooldown == 0 && !conqueredTiles.isEmpty()) {
+
+            // choosing random tile that can conquer
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(conqueredTiles.size());
+            int randomElement = conqueredTiles.get(randomIndex);
+            while (
+                    conqueredTiles.contains(randomElement + numOfTiles) &&
+                    conqueredTiles.contains(randomElement - numOfTiles) &&
+                    conqueredTiles.contains(randomElement + 1) &&
+                    conqueredTiles.contains(randomElement - 1))
+            {
+                randomIndex = rand.nextInt(conqueredTiles.size());
+                randomElement = conqueredTiles.get(randomIndex);
+            }
+
+            // checking what conquers civ can do
+            int n = rand.nextInt(101);
+            conquerTile = false;
+            conquerEnemy = false;
+            if (n <= chanceToGetTile) {
+                conquerTile = true;
+            }
+            if (n <= chanceToGetEnemy) {
+                conquerEnemy = true;
+            }
+
+            // conquering another tiles
+            if ((randomElement < numOfTiles * (numOfTiles - 1)) && boardArray[randomElement + numOfTiles] == 0 && conquerTile) {
+                target = randomElement + numOfTiles;
+                takeControlOf(target);
+            }
+            else if ((randomElement < numOfTiles * (numOfTiles - 1)) && boardArray[randomElement + numOfTiles] != this.id && conquerEnemy) {
+                target = randomElement + numOfTiles;
+                takeControlOf(target);
+            }
+            else if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] == 0 && conquerTile) {
+                target = randomElement - numOfTiles;
+                takeControlOf(target);
+            }
+            else if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] != this.id && conquerEnemy) {
+                target = randomElement - numOfTiles;
+                takeControlOf(target);
+            }
+            else if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] == 0 && conquerTile) {
+                target = randomElement + 1;
+                takeControlOf(target);
+            }
+            else if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] != this.id && conquerEnemy) {
+                target = randomElement + 1;
+                takeControlOf(target);
+            }
+            else if ((randomElement % numOfTiles != 0) && boardArray[randomElement - 1] == 0 && conquerTile) {
+                target = randomElement - 1;
+                takeControlOf(target);
+            }
+            else if ((randomElement % numOfTiles != 0) && boardArray[randomElement - 1] != this.id && conquerEnemy) {
+                target = randomElement - 1;
+                takeControlOf(target);
+            }
+            currentCooldown = cooldown;
         }
-        int n = rand.nextInt(101);
-        if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
-                if ((randomElement < numOfTiles * (numOfTiles - 1)) && boardArray[randomElement + numOfTiles] != this.id) {
-                    target = randomElement + numOfTiles;
-                    takeControlOf(target);
-                }
-                else if ((randomElement > numOfTiles) && boardArray[randomElement - numOfTiles] != this.id) {
-                    target = randomElement - numOfTiles;
-                    takeControlOf(target);
-                }
-                else if ((randomElement % numOfTiles != numOfTiles - 1) && boardArray[randomElement + 1] != this.id) {
-                    target = randomElement + 1;
-                    takeControlOf(target);
-                }
-                else if ((randomElement % numOfTiles != 0) && boardArray[randomElement - 1] != this.id){
-                    target = randomElement - 1;
-                    takeControlOf(target);
-                }
+        else{
+            currentCooldown--;
         }
     }
 }
