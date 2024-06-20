@@ -41,6 +41,33 @@ abstract class Civilizations {
         return conqueredTiles;
     }
 
+    public void destroyTile(int target){
+        for(int i = 0; i <= conqueredTiles.size(); i++){
+            if(conqueredTiles.get(i).getIndex() == target){
+                conqueredTiles.remove(i);
+                break;
+            }
+        }
+        if(conqueredTiles.isEmpty()){
+            int civilizationsInPlay = 0;
+            int winningCiv = 0;
+            for(Civilizations civ: allCivilizations){
+                if(!civ.civDefeated()){
+                    civilizationsInPlay++;
+                    winningCiv = civ.getId();
+                }
+            }
+            if(civilizationsInPlay == 1){
+                System.out.println("Civilization " + winningCiv + " has won.");
+                System.exit(0);
+            }
+        }
+    }
+
+    public boolean civDefeated(){
+        return conqueredTiles.isEmpty();
+    }
+
     abstract void conquer();
 }
 

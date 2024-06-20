@@ -9,12 +9,7 @@ public class CivilizationCircle extends Civilizations{
     public void takeControlOf(int target){
         for (Civilizations civ : allCivilizations){
             if (boardArray[target] == civ.getId()){
-                for(int i = 0; i <= civ.conqueredTiles.size(); i++){
-                    if(civ.conqueredTiles.get(i).getIndex() == target){
-                        civ.conqueredTiles.remove(i);
-                        break;
-                    }
-                }
+                civ.destroyTile(target);
             }
         }
         addTile(target);

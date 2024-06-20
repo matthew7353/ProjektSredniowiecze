@@ -8,7 +8,7 @@ import java.util.Random;
 public class Main extends JFrame {
     public static void main(String[] args) {
         // LICZBA PÓL PLANSZY W JEDNYM RZĘDZIE
-        int numOfTiles = 40;
+        int numOfTiles = 10;
 
         Board board = new Board(numOfTiles);
         ArrayList<Civilizations> civilizationsInPlay = new ArrayList<>();

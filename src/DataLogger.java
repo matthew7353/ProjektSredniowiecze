@@ -19,7 +19,6 @@ public class DataLogger {
             temp[civ.getId() - 1] = String.valueOf(civ.getConqueredTiles().size());
         }
 
-        System.out.println(temp[0]);
         return conqueredTiles = String.join("\n", temp);
     }
 }
