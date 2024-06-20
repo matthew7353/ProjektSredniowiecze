@@ -13,11 +13,13 @@ public class DataLogger {
     }
     public static String data(ArrayList<Civilizations> civilizationsInPlay){
         String conqueredTiles;
-        String[] temp = new String[civilizationsInPlay.size() + 1];
+        String[] temp = new String[civilizationsInPlay.size()];
 
         for(Civilizations civ : civilizationsInPlay){
-            temp[civ.getId()] = String.valueOf(civ.getConqueredTiles().size());
+            temp[civ.getId() - 1] = String.valueOf(civ.getConqueredTiles().size());
         }
+
+        System.out.println(temp[0]);
         return conqueredTiles = String.join("\n", temp);
     }
 }
