@@ -6,11 +6,10 @@ public class CivilizationCircle extends Civilizations{
     CivilizationCircle(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles) {
         super(startingPoint, colorName, board, boardArray, id, numOfTiles);
     }
-    ArrayList<Integer> newConqueredTiles = new ArrayList<>();
     public void takeControlOf(int target){
         for (Civilizations civ : allCivilizations){
             if (boardArray[target] == civ.getId() && civ.conqueredTiles.contains(target)){
-                for(int i = 0; i < civ.conqueredTiles.size(); i++){
+                for(int i = 0; i <= civ.conqueredTiles.size(); i++){
                     if(civ.conqueredTiles.get(i) == target){
                         civ.conqueredTiles.remove(i);
                         break;
@@ -18,7 +17,7 @@ public class CivilizationCircle extends Civilizations{
                 }
             }
         }
-        newConqueredTiles.add(target);
+        conqueredTiles.add(target);
         boardArray[target] = this.id;
         board.updateCell(target / numOfTiles,target % numOfTiles, color);
 
@@ -38,8 +37,7 @@ public class CivilizationCircle extends Civilizations{
             randomElement = conqueredTiles.get(randomIndex);
         }
         int n = rand.nextInt(101);
-        //if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
-        if(n >= 0){
+        if (n <= (50 + (200/numOfTiles^2)*conqueredTiles.size())) {
                 if ((randomElement < numOfTiles * (numOfTiles - 1)) && boardArray[randomElement + numOfTiles] != this.id) {
                     target = randomElement + numOfTiles;
                     takeControlOf(target);
@@ -56,7 +54,6 @@ public class CivilizationCircle extends Civilizations{
                     target = randomElement - 1;
                     takeControlOf(target);
                 }
-            conqueredTiles.addAll(newConqueredTiles);
         }
     }
 }

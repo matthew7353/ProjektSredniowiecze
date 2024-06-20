@@ -9,7 +9,7 @@ abstract class Civilizations {
     int [] boardArray;
     int id;
     int numOfTiles;
-    static int target;
+    int target;
     ArrayList<Civilizations> allCivilizations;
     ArrayList<Integer> conqueredTiles = new ArrayList<>();
     Civilizations(int startingPoint, Color colorName, Board board, int [] boardArray, int id, int numOfTiles){
