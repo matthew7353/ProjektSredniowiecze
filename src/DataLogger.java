@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DataLogger {
     public static void logData(String fileName, ArrayList<Civilizations> civilizationsInPlay){
@@ -12,13 +13,27 @@ public class DataLogger {
         }
     }
     public static String data(ArrayList<Civilizations> civilizationsInPlay){
-        String conqueredTiles;
-        String[] temp = new String[civilizationsInPlay.size()];
+        String[][] temp = new String[civilizationsInPlay.size()][2];
 
         for(Civilizations civ : civilizationsInPlay){
-            temp[civ.getId() - 1] = String.valueOf(civ.getConqueredTiles().size());
+            temp[civ.getId() - 1][0] = String.valueOf(civ.getConqueredTiles().size());
+            temp[civ.getId() - 1][1] = civ.getColor().getColorSpace().getName(civ.getId() - 1);
         }
+        int max = 0;
+        int maxId = 0;
 
-        return conqueredTiles = String.join("\n", temp);
+        for (int i = 0; i < temp.length; i++) {
+            int currentSize = Integer.parseInt(temp[i][0]);
+            if (currentSize > max) {
+                max = currentSize;
+                maxId = i;
+            }
+        }
+        String winner = temp[maxId][1];
+        String conqueredTiles = "The winner is " + winner + "!\n";
+        for (int i = 0; i < temp.length; i++) {
+            conqueredTiles = conqueredTiles + (temp[i][1] + " conquered " + temp[i][0] + " Tiles\n");
+        }
+        return conqueredTiles;
     }
 }
