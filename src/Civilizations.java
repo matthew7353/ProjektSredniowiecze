@@ -37,6 +37,9 @@ abstract class Civilizations {
     public void addTile(int target){
         conqueredTiles.add(new Tile(target, this.id, this.boardArray, this.numOfTiles));
     }
+    public ArrayList<Tile> getConqueredTiles(){
+        return conqueredTiles;
+    }
 
     abstract void conquer();
 }
