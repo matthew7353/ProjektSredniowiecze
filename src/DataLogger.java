@@ -17,15 +17,14 @@ public class DataLogger {
         String[][] temp = new String[civilizationsInPlay.size()][2];
 
         //filling the 2D temporary array with number of conquered tiles and the color of civilization
-        for(Civilizations civ : civilizationsInPlay){
-            temp[civ.getId() - 1][0] = String.valueOf(civ.getConqueredTiles().size());
-            temp[civ.getId() - 1][1] = civ.getColor().getColorSpace().getName(civ.getId() - 1);
+        for(int i = 0; i < civilizationsInPlay.size(); i++){
+            temp[i][0] = String.valueOf(civilizationsInPlay.get(i).getConqueredTiles().size());
         }
         int max = 0;
         int maxId = 0;
 
         //searching for civilization with the highest number of conquered tiles and getting its id
-        for (int i = 0; i < temp.length; i++) {
+        for (int i = 0; i < civilizationsInPlay.size(); i++) {
             int currentSize = Integer.parseInt(temp[i][0]);
             if (currentSize > max) {
                 max = currentSize;
@@ -37,7 +36,7 @@ public class DataLogger {
         //making output printable
         String conqueredTiles = "The winner is " + winner + "!\n";
         for (int i = 0; i < temp.length; i++) {
-            conqueredTiles = conqueredTiles + (temp[i][1] + " conquered " + temp[i][0] + " Tiles\n");
+            conqueredTiles = conqueredTiles + ("Cyvilization nr " + civilizationsInPlay.get(i).getId() + " conquered " + temp[i][0] + " Tiles\n");
         }
         return conqueredTiles;
     }
