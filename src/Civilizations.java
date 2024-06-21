@@ -71,12 +71,12 @@ abstract class Civilizations {
     abstract void conquer();
 
     public void takeControlOf(int target){
+        addTile(target);
         for (Civilizations civ : allCivilizations){
             if (boardArray[target] == civ.getId()){
                 civ.destroyTile(target);
             }
         }
-        addTile(target);
         boardArray[target] = this.id;
         board.updateCell(target / numOfTiles,target % numOfTiles, color);
 

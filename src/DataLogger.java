@@ -21,10 +21,10 @@ public class DataLogger {
             temp[civ.getId() - 1][0] = String.valueOf(civ.getConqueredTiles().size());
             temp[civ.getId() - 1][1] = civ.getColor().getColorSpace().getName(civ.getId() - 1);
         }
-        int max = 0;
-        int maxId = 0;
 
         //searching for civilization with the highest number of conquered tiles and getting its id
+        int max = 0;
+        int maxId = 0;
         for (int i = 0; i < temp.length; i++) {
             int currentSize = Integer.parseInt(temp[i][0]);
             if (currentSize > max) {
