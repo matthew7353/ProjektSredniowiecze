@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Main extends JFrame {
 
-    int numOfTiles = 5;
-    int timerDelay = 10;
+    int numOfTiles = 100;
+    int timerDelay = 1;
 
     public static void main(String[] args) {
         Main mainObject = new Main();
@@ -37,7 +37,7 @@ public class Main extends JFrame {
         //randomizing spawn points of civilizations
         int w1 = 0;
         ArrayList<Integer> positions = new ArrayList<>();
-        while (w1<4) {
+        while (w1<10) {
             Random rand = new Random();
             int n = rand.nextInt(mainObject.numOfTiles * mainObject.numOfTiles);
             int i = 0;
@@ -57,8 +57,7 @@ public class Main extends JFrame {
 
         civilizationsInPlay.add(new CivilizationCircle(positions.get(0), Color.RED, board, boardList, 1, mainObject.numOfTiles, 90, 10, 1));
         civilizationsInPlay.add(new CivilizationCircle(positions.get(1), Color.GREEN, board, boardList, 2, mainObject.numOfTiles, 50, 20, 2));
-        civilizationsInPlay.add(new CivilizationNext(positions.get(2), Color.BLUE, board, boardList, 3, mainObject.numOfTiles, 40, 80, 3));
-
+        civilizationsInPlay.add(new CivilizationCircle(positions.get(2), Color.BLUE, board, boardList, 3, mainObject.numOfTiles, 40, 80, 3));
         for (Civilizations civ : civilizationsInPlay) {
             civ.setAllCivilizations(civilizationsInPlay);
         }
