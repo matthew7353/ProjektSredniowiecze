@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataLogger {
-    public static void logData(String fileName, ArrayList<Civilizations> civilizationsInPlay){
+    public static void logData(String fileName, ArrayList<Civilizations> civilizationsInPlay, int turn){
         //txt file writer
         try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write(data(civilizationsInPlay));
+            writer.write(data(civilizationsInPlay, turn));
             System.out.println("Data saved to " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static String data(ArrayList<Civilizations> civilizationsInPlay){
+    public static String data(ArrayList<Civilizations> civilizationsInPlay, int turn){
         int maxId = 0;
         int currentSize = maxId;
         for (Civilizations civ : civilizationsInPlay) {
@@ -46,9 +46,10 @@ public class DataLogger {
 
         //making output printable
         String conqueredTiles = "The winner is Civilization nr " + winner + "!\n";
+        conqueredTiles += "The simulation ended on turn " + turn + "!\n";
         for (int i = 0; i <= maxId; i++) {
             if (temp[i][0] != null && temp[i][1] != null) {
-                conqueredTiles = conqueredTiles + ("Civilization nr " + temp[i][1] + " has conquered " + temp[i][0] + " Tiles\n");
+                conqueredTiles += ("Civilization nr " + temp[i][1] + " has conquered " + temp[i][0] + " Tiles\n");
             }
         }
         return conqueredTiles;

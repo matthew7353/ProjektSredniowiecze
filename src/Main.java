@@ -9,6 +9,7 @@ public class Main extends JFrame {
 
     int numOfTiles = 100;
     int timerDelay = 1;
+    int turn = 0;
 
     public static void main(String[] args) {
         Main mainObject = new Main();
@@ -19,7 +20,7 @@ public class Main extends JFrame {
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Saving data before exit...");
-            DataLogger.logData("SimulationData", civilizationsInPlay);
+            DataLogger.logData("SimulationData", civilizationsInPlay, mainObject.turn);
         }));
 
         // clock for simulation flow
@@ -30,6 +31,7 @@ public class Main extends JFrame {
                 for(Civilizations x: civilizationsInPlay){
                     x.conquer();
                 }
+                mainObject.turn++;
                 timer[0].restart();
             }
         });
