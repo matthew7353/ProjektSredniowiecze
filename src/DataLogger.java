@@ -47,7 +47,7 @@ public class DataLogger {
         //making output printable
         String conqueredTiles = "The winner is Civilization nr " + winner + "!\n";
         for (int i = 0; i <= maxId; i++) {
-            if (temp[i][1] != null && temp[i][1] != null) {
+            if (temp[i][0] != null && temp[i][1] != null) {
                 conqueredTiles = conqueredTiles + ("Civilization nr " + temp[i][1] + " has conquered " + temp[i][0] + " Tiles\n");
             }
         }
