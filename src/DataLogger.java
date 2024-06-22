@@ -14,30 +14,42 @@ public class DataLogger {
         }
     }
     public static String data(ArrayList<Civilizations> civilizationsInPlay){
-        String[][] temp = new String[civilizationsInPlay.size()][2];
+        int maxId = 0;
+        int currentSize = maxId;
+        for (Civilizations civ : civilizationsInPlay) {
+            currentSize = civ.getId();
+            if (currentSize >= civ.getId()) {
+                    maxId = currentSize;
+            }
+        }
+        String[][] temp = new String[maxId+1][2];
 
         //filling the 2D temporary array with number of conquered tiles and the color of civilization
         for(Civilizations civ : civilizationsInPlay){
-            temp[civ.getId() - 1][0] = String.valueOf(civ.getConqueredTiles().size());
-            temp[civ.getId() - 1][1] = civ.getColor().getColorSpace().getName(civ.getId() - 1);
+            temp[civ.getId()][0] = String.valueOf(civ.getConqueredTiles().size());
+            temp[civ.getId()][1] = String.valueOf(civ.getId());
         }
-        int max = 0;
-        int maxId = 0;
 
         //searching for civilization with the highest number of conquered tiles and getting its id
-        for (int i = 0; i < temp.length; i++) {
-            int currentSize = Integer.parseInt(temp[i][0]);
-            if (currentSize > max) {
-                max = currentSize;
-                maxId = i;
+        int maxNumberOfConqueredTiles = 0;
+        int idOfMax = 0;
+        for (int i = 0; i <= maxId; i++) {
+            if (temp[i][0] != null) {
+                int current = Integer.parseInt(temp[i][0]);
+                if (current > maxNumberOfConqueredTiles) {
+                    maxNumberOfConqueredTiles = current;
+                    idOfMax = i;
+                }
             }
         }
-        String winner = temp[maxId][1];
+        String winner = temp[idOfMax][1];
 
         //making output printable
-        String conqueredTiles = "The winner is " + winner + "!\n";
-        for (int i = 0; i < temp.length; i++) {
-            conqueredTiles = conqueredTiles + (temp[i][1] + " conquered " + temp[i][0] + " Tiles\n");
+        String conqueredTiles = "The winner is Civilization nr " + winner + "!\n";
+        for (int i = 0; i <= maxId; i++) {
+            if (temp[i][0] != null && temp[i][1] != null) {
+                conqueredTiles = conqueredTiles + ("Civilization nr " + temp[i][1] + " has conquered " + temp[i][0] + " Tiles\n");
+            }
         }
         return conqueredTiles;
     }
